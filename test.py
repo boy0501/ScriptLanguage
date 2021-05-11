@@ -5,3 +5,4 @@ ok = 3
 
 print(a)
 print('rrrrrrrr')
+print('어렵')
