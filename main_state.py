@@ -6,12 +6,12 @@ from main_func import MainFunc
 
 def enter():
     global image, elapsed ,bg
-    gfw.world.init(['logo','mainfunc'])
+    gfw.world.init(['mainfunc','logo'])
     global logo,m_func
     logo = Logo()
     m_func = MainFunc()
-    gfw.world.add(gfw.layer.logo,logo)
     gfw.world.add(gfw.layer.mainfunc,m_func)
+    gfw.world.add(gfw.layer.logo,logo)
 
 
 def update():
