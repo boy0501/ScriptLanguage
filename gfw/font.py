@@ -1,5 +1,5 @@
-from pico2d import *
-from tkinter import *
+from tkinter import font
+import gfw
 
 fonts = {}
 
@@ -8,8 +8,7 @@ def load(file, size):
     global fonts
     if key in fonts:
         return fonts[key]
-
-    font = load_font(file, size)
+    font = font.Font(gfw.window,family = file, size= size)
     fonts[key] = font
     return font
 

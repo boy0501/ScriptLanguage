@@ -1,6 +1,5 @@
 from functools import reduce
 import gfw
-from pico2d import *
 import math
 
 objects = []
@@ -62,23 +61,18 @@ def update():
     reference = [pos]
     for obj in all_objects():
         obj.update()
-        obj.screenshake(reference)
+        #obj.screenshake(reference)
         pos = reference[0]
     if len(trashcan) > 0:
         empty_trashcan()
-    #ㅡㅡㅡㅡㅡ 화면 흔들림효과
-    #pos =(math.sin(dtheta*180/math.pi) * 10, math.sin(dtheta*180/math.pi) * 10)
-    #dtheta = (dtheta+1) % 360
-    #ㅡㅡㅡㅡㅡ 화면 흔들림효과
     counts = list(map(len, objects))
     #print('count:', counts, count())
     #print(objects)
     #print(trashcan)
 
 def draw():
-    global pos
     for obj in all_objects():
-        obj.draw(pos)
+        obj.draw()
 
 def empty_trashcan():
     global trashcan

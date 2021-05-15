@@ -28,8 +28,8 @@ def run(start_state):
     window.geometry(w+'x'+h)
     window.resizable(width=False,height=False)
 
-    start_state.enter()
     window.mainloop()
+    start_state.enter()
     global delta_time
     last_time = time.time()
     while running:
@@ -39,25 +39,25 @@ def run(start_state):
         last_time = now
 
         # event handling
-        evts = get_events()
-        for e in evts:
-            stack[-1].handle_event(e)
+        #evts = get_events()
+        #for e in evts:
+        #    stack[-1].handle_event(e)
 
         # game logic
         stack[-1].update()
 
         # game rendering
-        clear_canvas()
+        #clear_canvas()
         stack[-1].draw()
-        update_canvas()
+        #update_canvas()
 
-        delay(frame_interval)
+        #delay(frame_interval)
 
     while (len(stack) > 0):
         stack[-1].exit()
         stack.pop()
 
-    close_canvas()
+    #close_canvas()
 
 def change(state):
     global stack
