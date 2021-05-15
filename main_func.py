@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter.ttk
 import gfw
 
 
@@ -24,6 +25,13 @@ class MainFunc:
         Button(gfw.window,text="즐겨찾기",width=18,height=2).place(x=50,y=400)
         Button(gfw.window,text="정보",width=18,height=2).place(x=198,y=400)
         Button(gfw.window,text="검색",width=10,height=2).place(x=540,y=20)
+
+        values=[str(i)+"번" for i in range(1, 101)] 
+
+        
+        combobox = tkinter.ttk.Combobox(gfw.window,values=values)
+        combobox.place(x=350,y=40)
+        combobox.config(state='readonly')
 
 
         
