@@ -1,6 +1,10 @@
+
 from tkinter import *
 import tkinter.ttk
 import gfw
+import urllib.request
+import base64
+
 
 
 
@@ -32,7 +36,13 @@ class MainFunc:
         combobox = tkinter.ttk.Combobox(gfw.window,values=values)
         combobox.place(x=350,y=40)
         combobox.config(state='readonly')
-
+        #u = urllib.request.urlopen("https://www.google.co.kr/maps/place/%EA%B2%BD%EA%B8%B0%EB%8F%84+%EC%8B%9C%ED%9D%A5%EC%8B%9C+%EC%A0%95%EC%99%951%EB%8F%99+%EC%82%B0%EA%B8%B0%EB%8C%80%ED%95%99%EB%A1%9C+237/@37.3403904,126.7313098,17z/data=!3m1!4b1!4m5!3m4!1s0x357b71060072975f:0xa150df14513cae41!8m2!3d37.3403904!4d126.7334985?hl=ko")
+        #raw_data = u.read()
+        #u.close()
+        f = open("보기용.png","rb")
+        img = f.read()
+        pimg = PhotoImage(data=img)
+        Label(gfw.window,image=pimg).pack()
 
         
 

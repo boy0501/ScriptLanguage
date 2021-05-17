@@ -28,8 +28,12 @@ def run(start_state):
     window.geometry(w+'x'+h)
     window.resizable(width=False,height=False)
 
-    window.mainloop()
     start_state.enter()
+    window.mainloop()
+    while (len(stack) > 0):
+        stack[-1].exit()
+        stack.pop()
+    exit()
     global delta_time
     last_time = time.time()
     while running:
@@ -53,9 +57,7 @@ def run(start_state):
 
         #delay(frame_interval)
 
-    while (len(stack) > 0):
-        stack[-1].exit()
-        stack.pop()
+
 
     #close_canvas()
 

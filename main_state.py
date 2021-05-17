@@ -10,8 +10,10 @@ def enter():
     global logo,m_func
     logo = Logo()
     m_func = MainFunc()
-    #gfw.world.add(gfw.layer.mainfunc,m_func)
-    #gfw.world.add(gfw.layer.logo,logo)
+    gfw.world.add(gfw.layer.mainfunc,m_func)
+    gfw.world.add(gfw.layer.logo,logo)
+    
+
 
 
 def update():
@@ -19,6 +21,7 @@ def update():
 
 def draw():
     gfw.world.draw()
+    
 
 def handle_event(e):
     if e.type == SDL_QUIT:
