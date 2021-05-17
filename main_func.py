@@ -2,18 +2,17 @@
 from tkinter import *
 import tkinter.ttk
 import gfw
-import urllib.request
-import base64
-
-
-
-
+import urllib.request              
+import requests
+from PIL import Image
+from io import BytesIO
+import PIL.ImageTk
 
 class MainFunc:
     def __init__(self):
         #리스트박스를 위한 프레임/스크롤바
         self.ListFrame = Frame(gfw.window)
-        self.ListFrame.place(x=50,y=150)
+        self.ListFrame.place(x=30,y=150)
         self.scrollbar = Scrollbar(self.ListFrame)
         self.scrollbar.pack(side="right",fill="y")
 
@@ -27,23 +26,38 @@ class MainFunc:
         
         #실 사용할 버튼들
         Button(gfw.window,text="즐겨찾기",width=18,height=2).place(x=50,y=400)
-        Button(gfw.window,text="정보",width=18,height=2).place(x=198,y=400)
-        Button(gfw.window,text="검색",width=10,height=2).place(x=540,y=20)
+        Button(gfw.window,text="정보",width=18,height=2).place(x=178,y=400)
+        Button(gfw.window,text="검색",width=10,height=2).place(x=520,y=20)
 
         values=[str(i)+"번" for i in range(1, 101)] 
 
         
         combobox = tkinter.ttk.Combobox(gfw.window,values=values)
-        combobox.place(x=350,y=40)
+        combobox.place(x=330,y=40)
         combobox.config(state='readonly')
-        #u = urllib.request.urlopen("https://www.google.co.kr/maps/place/%EA%B2%BD%EA%B8%B0%EB%8F%84+%EC%8B%9C%ED%9D%A5%EC%8B%9C+%EC%A0%95%EC%99%951%EB%8F%99+%EC%82%B0%EA%B8%B0%EB%8C%80%ED%95%99%EB%A1%9C+237/@37.3403904,126.7313098,17z/data=!3m1!4b1!4m5!3m4!1s0x357b71060072975f:0xa150df14513cae41!8m2!3d37.3403904!4d126.7334985?hl=ko")
-        #raw_data = u.read()
-        #u.close()
-        f = open("보기용.png","rb")
-        img = f.read()
-        pimg = PhotoImage(data=img)
-        Label(gfw.window,image=pimg).pack()
+        #구글맵 띄우기
+        largura = 300
+        alturaplus = 300
 
+        # 마지막 markers 만 표시됨
+        #37.3394985,126.7336518,16.58z
+        urlparams = urllib.parse.urlencode({'center': '31.3394985,126.7336518',
+                                            'zoom': '15',
+                                            'size': '%dx%d' % (largura, alturaplus),
+                                            'maptype': 'roadmap',
+                                            'markers': 'color:blue|label:S|40.702147,-74.015794',
+                                            'markers': 'color:green|label:G|40.711614,-74.012318',
+                                            'markers': 'color:red|label:C|40.718217,-73.998284',
+                                            'key': 'AIzaSyBZRdlRcQY9vehUC0-A5m7TKYpi5iI48Yk'})
+        # 세개의 marker 모두 표시됨.
+        #urlparams = 'https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=640x640&markers=color:blue%7Clabel:S%7C62.107733,-145.541936&markers=color:green%7CDelta+Junction,AK&markers=color:0xFFFF00%7Clabel:C%7CTok,AK"&key=AIzaSyDdMEbLtZCpCmtJ2X-QZYRH1mOPGOUE76A'
+
+        url = 'https://maps.googleapis.com/maps/api/staticmap?' + urlparams
+        r = requests.get(url)
+        im = Image.open(BytesIO(r.content))
+        self.image = PIL.ImageTk.PhotoImage(im)
+        Label(gfw.window,image=self.image).place(x=330,y=150)
+        
         
 
         
