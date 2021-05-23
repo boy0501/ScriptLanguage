@@ -2,16 +2,17 @@ import gfw
 from tkinter import *
 from Logo import Logo
 from main_func import MainFunc
+from info import InfoFunc
 
 
 def enter():
     global image, elapsed ,bg
-    gfw.world.init(['mainfunc','logo'])
+    gfw.world.init(['logo','mainfunc','infofunc'])
     global logo,m_func
     logo = Logo()
     m_func = MainFunc()
-    gfw.world.add(gfw.layer.mainfunc,m_func)
     gfw.world.add(gfw.layer.logo,logo)
+    gfw.world.add(gfw.layer.mainfunc,m_func)
     
 
 

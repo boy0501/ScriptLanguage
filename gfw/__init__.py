@@ -11,6 +11,7 @@ stack = None
 frame_interval = 0.01
 delta_time = 0
 window = Tk()
+Objects = {}
 
 def quit():
     global running
@@ -62,18 +63,15 @@ def run(start_state):
     #close_canvas()
 
 def change(state):
-    global stack
-    if (len(stack) > 0):
-        stack.pop().exit()
-    stack.append(state)
-    state.enter()
+    global Objects
+    pass
+
+
+
 
 def push(state):
-    global stack
-    if (len(stack) > 0):
-        stack[-1].pause()
-    stack.append(state)
-    state.enter()
+    global Objects
+    Objects[state] = []
 
 def pop():
     global stack
