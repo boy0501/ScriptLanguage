@@ -47,28 +47,28 @@ class MainFunc:
         self.combobox.config(state='readonly')
 
 
-       ##구글맵 띄우기 일단 트래픽 먹어서 주석처리 해둠
-       #largura = 300
-       #alturaplus = 300
-
-       ## 마지막 markers 만 표시됨
-       ##37.3394985,126.7336518,16.58z
-       #urlparams = urllib.parse.urlencode({'center': '37.3394985,126.7336518',
-       #                                    'zoom': '15',
-       #                                    'size': '%dx%d' % (largura, alturaplus),
-       #                                    'maptype': 'roadmap',
-       #                                    'markers': 'color:blue|label:S|40.702147,-74.015794',
-       #                                    'markers': 'color:green|label:G|40.711614,-74.012318',
-       #                                    'markers': 'color:red|label:C|40.718217,-73.998284',
-       #                                    'key': 'AIzaSyBZRdlRcQY9vehUC0-A5m7TKYpi5iI48Yk'})
-       ## 세개의 marker 모두 표시됨.
-       ##urlparams = 'https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=640x640&markers=color:blue%7Clabel:S%7C62.107733,-145.541936&markers=color:green%7CDelta+Junction,AK&markers=color:0xFFFF00%7Clabel:C%7CTok,AK"&key=AIzaSyDdMEbLtZCpCmtJ2X-QZYRH1mOPGOUE76A'
-
-       #url = 'https://maps.googleapis.com/maps/api/staticmap?' + urlparams
-       #r = requests.get(url)
-       #im = Image.open(BytesIO(r.content))
-       #self.image = PIL.ImageTk.PhotoImage(im)
-       #Label(gfw.window,image=self.image).place(x=330,y=150)
+        ##구글맵 띄우기 일단 트래픽 먹어서 주석처리 해둠
+        #largura = 300
+        #alturaplus = 300
+#
+        ## 마지막 markers 만 표시됨
+        ##37.3394985,126.7336518,16.58z
+        #urlparams = urllib.parse.urlencode({'center': '37.3394985,126.7336518',
+        #                                    'zoom': '15',
+        #                                    'size': '%dx%d' % (largura, alturaplus),
+        #                                    'maptype': 'roadmap',
+        #                                    'markers': 'color:blue|label:S|40.702147,-74.015794',
+        #                                    'markers': 'color:green|label:G|40.711614,-74.012318',
+        #                                    'markers': 'color:red|label:C|40.718217,-73.998284',
+        #                                    'key': 'AIzaSyBZRdlRcQY9vehUC0-A5m7TKYpi5iI48Yk'})
+        ## 세개의 marker 모두 표시됨.
+        ##urlparams = 'https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=640x640&markers=color:blue%7Clabel:S%7C62.107733,-145.541936&markers=color:green%7CDelta+Junction,AK&markers=color:0xFFFF00%7Clabel:C%7CTok,AK"&key=AIzaSyDdMEbLtZCpCmtJ2X-QZYRH1mOPGOUE76A'
+    #
+        #url = 'https://maps.googleapis.com/maps/api/staticmap?' + urlparams
+        #r = requests.get(url)
+        #im = Image.open(BytesIO(r.content))
+        #self.image = PIL.ImageTk.PhotoImage(im)
+        #Label(gfw.window,image=self.image).place(x=330,y=150)
 
     def pushObj(self,obj):
         gfw.Objects[__name__].append(obj)
