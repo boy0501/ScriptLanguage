@@ -36,11 +36,14 @@ class InfoFunc:
             if i._name == "!frame": #Logo는 무조건 첫번째니까 항상 frame 1임
                 continue
             i.place_forget()
-        gfw.Objects['imsi'][4].place(x=30,y=150)    #리스트박스
-        gfw.Objects['imsi'][3].place(x=50,y=400)    #정보
-        gfw.Objects['imsi'][2].place(x=178,y=400)   #검색
-        gfw.Objects['imsi'][1].place(x=520,y=20)    #즐찾
-        gfw.Objects['imsi'][0].place(x=330,y=40)    #콤보박스
+        gfw.Objects['imsi'][7].place(x=30,y=150)    #명단리스트
+        gfw.Objects['imsi'][6].place(x=50,y=400)    #정보
+        gfw.Objects['imsi'][5].place(x=178,y=400)   #검색
+        gfw.Objects['imsi'][4].place(x=520,y=20)    #즐찾
+        gfw.Objects['imsi'][3].place(x=300,y=20)    #줌인
+        gfw.Objects['imsi'][2].place(x=300,y=70)    #줌아웃
+        gfw.Objects['imsi'][1].place(x=330,y=40)    #콤보박스
+        gfw.Objects['imsi'][0].place(x=330,y=150)    #지도리스트
 
     def LoadBookMark(self):
         try:
