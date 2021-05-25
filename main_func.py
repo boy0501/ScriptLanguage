@@ -82,9 +82,14 @@ class MainFunc:
     def ZoomIn(self):
         if self.Zoom + 1 < 19:
             self.Zoom += 1
-
-        y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
-        x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        if self.BookMarkTab:
+            y = self.bookmarkList[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+            x = self.bookmarkList[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        else:
+            y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+            x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        #y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+        #x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
         url = 'https://api-maps.cloud.toast.com/maps/v3.0/appkeys/vtJBJf5yCkI6EgPY/static-maps?lon=%s&lat=%s&width=300&height=300&mx=%s&my=%s&zoom=%d' % (y,x,y,x,self.Zoom)
         r = requests.get(url)
         im = Image.open(BytesIO(r.content))
@@ -94,9 +99,14 @@ class MainFunc:
     def ZoomOut(self):
         if self.Zoom - 1 > 0:
             self.Zoom -= 1
-            
-        y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
-        x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        if self.BookMarkTab:
+            y = self.bookmarkList[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+            x = self.bookmarkList[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        else:
+            y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+            x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        #y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+        #x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
         url = 'https://api-maps.cloud.toast.com/maps/v3.0/appkeys/vtJBJf5yCkI6EgPY/static-maps?lon=%s&lat=%s&width=300&height=300&mx=%s&my=%s&zoom=%d' % (y,x,y,x,self.Zoom)
         r = requests.get(url)
         im = Image.open(BytesIO(r.content))
@@ -104,8 +114,14 @@ class MainFunc:
         self.mapinfo.configure(image=self.image)
 
     def UpdateMap(self,event):
-        y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
-        x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        if self.BookMarkTab:
+            y = self.bookmarkList[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+            x = self.bookmarkList[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        else:
+            y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+            x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
+        #y = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LOGT']
+        #x = ggToilet.listToilet[self.listbox.curselection()[0]]['REFINE_WGS84_LAT']
         urlparams = urllib.parse.urlencode({'center': '%s,%s' % (x,y),
                                             'zoom': '15',
                                             'size': '%dx%d' % (300, 300),

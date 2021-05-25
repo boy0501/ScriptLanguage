@@ -58,8 +58,8 @@ def extractBookData(strXml):
         toilet['MALE_FEMALE_TOILET_YN'] = item.find("MALE_FEMALE_TOILET_YN").text
         toilet['MALE_WTRCLS_CNT'] = item.find("MALE_WTRCLS_CNT").text
         toilet['MALE_UIL_CNT'] = item.find("MALE_UIL_CNT").text
-        toilet['DATA_STD_DE'] = item.find("MALE_DSPSN_WTRCLS_CNT").text
-        toilet['MALE_DSPSN_WTRCLS_CNT'] = item.find("MALE_DSPSN_UIL_CNT").text
+        toilet['MALE_DSPSN_WTRCLS_CNT'] = item.find("MALE_DSPSN_WTRCLS_CNT").text
+        toilet['MALE_DSPSN_UIL_CNT'] = item.find("MALE_DSPSN_UIL_CNT").text
         toilet['MALE_CHILDUSE_WTRCLS_CNT'] = item.find("MALE_CHILDUSE_WTRCLS_CNT").text
         toilet['MALE_CHILDUSE_UIL_CNT'] = item.find("MALE_CHILDUSE_UIL_CNT").text
         toilet['FEMALE_WTRCLS_CNT'] = item.find("FEMALE_WTRCLS_CNT").text

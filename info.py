@@ -27,8 +27,75 @@ class InfoFunc:
         Button(gfw.window,image=gfw.image.load('Gmail.png')).place(x=325,y=250)
         Button(gfw.window,image=gfw.image.load('tellegram.png')).place(x=325,y=350)
         Button(gfw.window,text="저장하기",width=10,height=2,command=self.saveText).place(x=150,y=430)
+        Button(gfw.window,text="여자화장실",width=5,height=1,command=self.LoadWomanChart).place(x=400,y=455)
+        Button(gfw.window,text="남자화장실",width=5,height=1,command=self.LoadManChart).place(x=600,y=455)
+        
+        c_width = 300
+        c_height = 280
+        self.c = Canvas(gfw.window, width=c_width, height=c_height, bg= 'white')
+        self.c.place(x=330,y=150)
         self.LoadText()
         self.LoadBookMark()
+        self.LoadManChart()
+
+    def LoadManChart(self):
+        #바 차트
+        self.c.delete("delable")
+
+        data = [int(self.Toilet['MALE_WTRCLS_CNT']),
+        int(self.Toilet['MALE_UIL_CNT']),
+        int(self.Toilet['MALE_DSPSN_WTRCLS_CNT']),
+        int(self.Toilet['MALE_DSPSN_UIL_CNT']),
+        int(self.Toilet['MALE_CHILDUSE_WTRCLS_CNT']),
+        int(self.Toilet['MALE_CHILDUSE_UIL_CNT'])]
+
+
+        #experiment with the variables below size to fit your needs
+
+        c_width = 300
+        c_height = 280
+
+        y_stretch = 10
+        y_gap = 20
+        x_stretch = 20  #그래프간 간격
+        x_width = 20    #그래프 한칸의 너비
+        x_gap = 40      #그래프 시작만큼의 너비 
+        for x, y in enumerate(data):
+            # calculate reactangle coordinates
+            x0 = x * x_stretch + x * x_width + x_gap
+            y0 = c_height - (y * y_stretch + y_gap)
+            x1 = x * x_stretch + x * x_width + x_width + x_gap
+            y1 = c_height - y_gap
+            # Here we draw the bar
+            self.c.create_rectangle(x0, y0, x1, y1, fill="red",tags="delable")
+            self.c.create_text(x0+2, y0, anchor=SW, text=str(y),tags="delable")
+    
+    def LoadWomanChart(self):
+        self.c.delete("delable")
+        data = [int(self.Toilet['FEMALE_WTRCLS_CNT']),
+        int(self.Toilet['FEMALE_DSPSN_WTRCLS_CNT']),
+        int(self.Toilet['FEMALE_CHILDUSE_WTRCLS_CNT'])]
+
+        c_width = 300
+        c_height = 280
+
+        #experiment with the variables below size to fit your needs
+
+        y_stretch = 5
+        y_gap = 20
+        x_stretch = 90  #그래프간 간격
+        x_width = 20    #그래프 한칸의 너비 
+        x_gap = 40      #그래프 시작만큼의 너비  
+        for x, y in enumerate(data):
+            # calculate reactangle coordinates
+            x0 = x * x_stretch + x * x_width + x_gap
+            y0 = c_height - (y * y_stretch + y_gap)
+            x1 = x * x_stretch + x * x_width + x_width + x_gap
+            y1 = c_height - y_gap
+            # Here we draw the bar
+            self.c.create_rectangle(x0, y0, x1, y1, fill="red",tags="delable")
+            self.c.create_text(x0+2, y0, anchor=SW, text=str(y),tags="delable")
+        
 
     def RetMain(self):
         mylist = gfw.window.place_slaves()
