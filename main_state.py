@@ -11,6 +11,8 @@ def enter():
     global logo,m_func
     logo = Logo()
     m_func = MainFunc()
+    gfw.Objects['main_func'] = []
+    gfw.Objects['info'] =[]
     gfw.world.add(gfw.layer.logo,logo)
     gfw.world.add(gfw.layer.mainfunc,m_func)
     

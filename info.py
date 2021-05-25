@@ -10,10 +10,11 @@ import PIL.ImageTk
 import ggToilet
 import fileinput
 import sys
+import pickle
 
 class InfoFunc:
     def __init__(self,Toilet):
-        Button(gfw.window,text="뒤로가기",width=10,height=2).place(x=520,y=20)
+        Button(gfw.window,text="뒤로가기",width=10,height=2,command=self.RetMain).place(x=520,y=20)
         str = StringVar()
         self.textbox = Text(gfw.window,width=40,height=20,background="yellow")
         self.textbox.place(x=30,y=150)
@@ -22,11 +23,34 @@ class InfoFunc:
         self.Toilet = Toilet
         self.bookmarkButton = Button(gfw.window,image=self.image,command=self.bookmarking)
         self.bookmarkButton.place(x=325,y=150)
+        self.bookmarkList = []
         Button(gfw.window,image=gfw.image.load('Gmail.png')).place(x=325,y=250)
         Button(gfw.window,image=gfw.image.load('tellegram.png')).place(x=325,y=350)
         Button(gfw.window,text="저장하기",width=10,height=2,command=self.saveText).place(x=150,y=430)
         self.LoadText()
+        self.LoadBookMark()
 
+    def RetMain(self):
+        mylist = gfw.window.place_slaves()
+        for i in mylist:
+            if i._name == "!frame": #Logo는 무조건 첫번째니까 항상 frame 1임
+                continue
+            i.place_forget()
+        gfw.Objects['imsi'][4].place(x=30,y=150)    #리스트박스
+        gfw.Objects['imsi'][3].place(x=50,y=400)    #정보
+        gfw.Objects['imsi'][2].place(x=178,y=400)   #검색
+        gfw.Objects['imsi'][1].place(x=520,y=20)    #즐찾
+        gfw.Objects['imsi'][0].place(x=330,y=40)    #콤보박스
+
+    def LoadBookMark(self):
+        try:
+            with open('bookmark','rb') as f:
+                self.bookmarkList = pickle.load(f)
+        except:
+            pass
+        if self.Toilet in self.bookmarkList:
+            self.isbooked = True
+            self.bookmarkButton.configure(image=gfw.image.load('YellowStar.png'))
     def LoadText(self):
         try:
             f = open(self.Toilet['SIGUN_NM']+'.txt',"r")
@@ -42,13 +66,20 @@ class InfoFunc:
         
 
     def bookmarking(self):
-        self.isbooked = not self.isbooked
+        self.isbooked = not self.isbooked   
         if self.isbooked == True:
             self.image = gfw.image.load('YellowStar.png')
             self.bookmarkButton.configure(image=self.image)
+            self.bookmarkList.append(self.Toilet)
+            with open('bookmark','wb') as f:
+                pickle.dump(self.bookmarkList,f)
+
         else:
             self.image = gfw.image.load('WhiteStar.png')
             self.bookmarkButton.configure(image=self.image)
+            del self.bookmarkList[self.bookmarkList.index(self.Toilet)]
+            with open('bookmark','wb') as f:
+                pickle.dump(self.bookmarkList,f)            
 
     def saveText(self):
         imsi = self.textbox.get("1.0","end")

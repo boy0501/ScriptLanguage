@@ -9,10 +9,12 @@ from io import BytesIO
 import PIL.ImageTk
 import ggToilet
 from info import InfoFunc
+import pickle
 
 class MainFunc:
     def __init__(self):
         #리스트박스를 위한 프레임/스크롤바
+        self.BookMarkTab = False        #북마크 화면이면 True 아니면 False
         self.ListFrame = Frame(gfw.window)
         self.ListFrame.place(x=30,y=150)
 
@@ -22,6 +24,7 @@ class MainFunc:
 
         self.listbox = Listbox(self.ListFrame,yscrollcommand= self.scrollbar.set,width= 40,height=15)
 
+        #디폴트
         ggToilet.getGGToiletDataFromISBN('시흥시')
         for line in range(len( ggToilet.listToilet)):
             self.listbox.insert(line+1, ggToilet.listToilet[line]['PBCTLT_PLC_NM'])
@@ -32,7 +35,7 @@ class MainFunc:
         self.scrollbar["command"] = self.listbox.yview
         
         #실 사용할 버튼들
-        Button(gfw.window,text="즐겨찾기",width=18,height=2).place(x=50,y=400)
+        Button(gfw.window,text="즐겨찾기",width=18,height=2,command=self.BookMark).place(x=50,y=400)
         Button(gfw.window,text="정보",width=18,height=2,command=self.ToInfo).place(x=178,y=400)
         Button(gfw.window,text="검색",width=10,height=2,command=self.search).place(x=520,y=20)
 
@@ -69,11 +72,23 @@ class MainFunc:
         #im = Image.open(BytesIO(r.content))
         #self.image = PIL.ImageTk.PhotoImage(im)
         #Label(gfw.window,image=self.image).place(x=330,y=150)
+    def BookMark(self):
+        self.BookMarkTab = True
+        self.bookmarkList = []
+        try:
+            with open('bookmark','rb') as f:
+                self.bookmarkList = pickle.load(f)
+        except:
+            pass
+        self.listbox.delete(0,END)
+        for line in range(len(self.bookmarkList)):
+            self.listbox.insert(line+1, self.bookmarkList[line]['PBCTLT_PLC_NM'])
 
     def pushObj(self,obj):
         gfw.Objects[__name__].append(obj)
 
     def search(self):
+        self.BookMarkTab = False
         self.listbox.delete(0, len(ggToilet.listToilet)+1)
         ggToilet.getGGToiletDataFromISBN(self.combobox.get())
         for line in range(len( ggToilet.listToilet)):
@@ -81,11 +96,15 @@ class MainFunc:
     
     def ToInfo(self):
         mylist = gfw.window.place_slaves()
+        gfw.Objects['imsi'] = mylist
         for i in mylist:
             if i._name == "!frame": #Logo는 무조건 첫번째니까 항상 frame 1임
                 continue
             i.place_forget()
-        selectedToilet =  ggToilet.listToilet[self.listbox.curselection()[0]]
+        if self.BookMarkTab:
+            selectedToilet = self.bookmarkList[self.listbox.curselection()[0]]
+        else:
+            selectedToilet =  ggToilet.listToilet[self.listbox.curselection()[0]]
 
         info_func = InfoFunc(selectedToilet)
         gfw.world.add(gfw.layer.infofunc,info_func)
