@@ -16,6 +16,7 @@ def enter():
     gfw.world.add(gfw.layer.logo,logo)
     gfw.world.add(gfw.layer.mainfunc,m_func)
     
+    
 
 
 

@@ -15,17 +15,16 @@ import pickle
 class InfoFunc:
     def __init__(self,Toilet):
         Button(gfw.window,text="뒤로가기",width=10,height=2,command=self.RetMain).place(x=520,y=20)
-        str = StringVar()
-        self.textbox = Text(gfw.window,width=40,height=20,background="yellow")
+        self.textbox = Text(gfw.window,width=30,height=20,background="yellow")
         self.textbox.place(x=30,y=150)
         self.isbooked = False
         self.image = gfw.image.load('Asset/image/WhiteStar.png')
         self.Toilet = Toilet
         self.bookmarkButton = Button(gfw.window,image=self.image,command=self.bookmarking)
-        self.bookmarkButton.place(x=325,y=150)
+        self.bookmarkButton.place(x=260,y=150)
         self.bookmarkList = []
-        Button(gfw.window,image=gfw.image.load('Asset/image/Gmail.png')).place(x=325,y=250)
-        Button(gfw.window,image=gfw.image.load('Asset/image/tellegram.png')).place(x=325,y=350)
+        Button(gfw.window,image=gfw.image.load('Asset/image/Gmail.png')).place(x=260,y=250)
+        Button(gfw.window,image=gfw.image.load('Asset/image/tellegram.png')).place(x=260,y=350)
         Button(gfw.window,text="저장하기",width=10,height=2,command=self.saveText).place(x=150,y=430)
         Button(gfw.window,text="여자화장실",width=10,height=1,command=self.LoadWomanChart).place(x=500,y=450)
         Button(gfw.window,text="남자화장실",width=10,height=1,command=self.LoadManChart).place(x=400,y=450)
@@ -37,6 +36,19 @@ class InfoFunc:
         self.LoadText()
         self.LoadBookMark()
         self.LoadManChart()
+        opentime = ""
+        telno = ""
+        if self.Toilet['OPEN_TM_INFO'] == None:
+            opentime = "미정"
+        else:
+            opentime = self.Toilet['OPEN_TM_INFO']
+        if self.Toilet['MANAGE_INST_TELNO'] == None:
+            telno = "없음"
+        else:
+            telno = self.Toilet['MANAGE_INST_TELNO']            
+        self.c.create_text(150,20,text="개방시간 : " + opentime)
+        self.c.create_text(150,40,text="전화번호 : " + telno)
+        self.c.create_text(150,60,text="남여공용? : " + self.Toilet['MALE_FEMALE_TOILET_YN'])
 
     def LoadManChart(self):
         #바 차트
@@ -76,6 +88,7 @@ class InfoFunc:
         self.c.create_image(170,270,image=gfw.image.load("Asset/image/장애.png"),tags="delable")
         self.c.create_image(210,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
         self.c.create_image(250,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
+
     
     def LoadWomanChart(self):
         self.c.delete("delable")
