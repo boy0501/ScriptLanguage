@@ -8,7 +8,7 @@ class Logo:
     def __init__(self):
         self.frame = Frame(gfw.window)
         self.frame.place(x = 100, y = 0)
-        self.image = gfw.image.load('똥터.png')
+        self.image = gfw.image.load('Asset/image/똥터.png')
         Label(self.frame,image=self.image).pack()
 
 

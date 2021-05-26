@@ -19,16 +19,16 @@ class InfoFunc:
         self.textbox = Text(gfw.window,width=40,height=20,background="yellow")
         self.textbox.place(x=30,y=150)
         self.isbooked = False
-        self.image = gfw.image.load('WhiteStar.png')
+        self.image = gfw.image.load('Asset/image/WhiteStar.png')
         self.Toilet = Toilet
         self.bookmarkButton = Button(gfw.window,image=self.image,command=self.bookmarking)
         self.bookmarkButton.place(x=325,y=150)
         self.bookmarkList = []
-        Button(gfw.window,image=gfw.image.load('Gmail.png')).place(x=325,y=250)
-        Button(gfw.window,image=gfw.image.load('tellegram.png')).place(x=325,y=350)
+        Button(gfw.window,image=gfw.image.load('Asset/image/Gmail.png')).place(x=325,y=250)
+        Button(gfw.window,image=gfw.image.load('Asset/image/tellegram.png')).place(x=325,y=350)
         Button(gfw.window,text="저장하기",width=10,height=2,command=self.saveText).place(x=150,y=430)
-        Button(gfw.window,text="여자화장실",width=5,height=1,command=self.LoadWomanChart).place(x=400,y=455)
-        Button(gfw.window,text="남자화장실",width=5,height=1,command=self.LoadManChart).place(x=600,y=455)
+        Button(gfw.window,text="여자화장실",width=10,height=1,command=self.LoadWomanChart).place(x=500,y=450)
+        Button(gfw.window,text="남자화장실",width=10,height=1,command=self.LoadManChart).place(x=400,y=450)
         
         c_width = 300
         c_height = 280
@@ -69,6 +69,13 @@ class InfoFunc:
             # Here we draw the bar
             self.c.create_rectangle(x0, y0, x1, y1, fill="red",tags="delable")
             self.c.create_text(x0+2, y0, anchor=SW, text=str(y),tags="delable")
+        #self.c.create_text(50,270,text='\U0001f6bd')
+        self.c.create_image(50,270,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(90,270,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
+        self.c.create_image(130,270,image=gfw.image.load("Asset/image/장애.png"),tags="delable")
+        self.c.create_image(170,270,image=gfw.image.load("Asset/image/장애.png"),tags="delable")
+        self.c.create_image(210,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
+        self.c.create_image(250,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
     
     def LoadWomanChart(self):
         self.c.delete("delable")
@@ -95,6 +102,9 @@ class InfoFunc:
             # Here we draw the bar
             self.c.create_rectangle(x0, y0, x1, y1, fill="red",tags="delable")
             self.c.create_text(x0+2, y0, anchor=SW, text=str(y),tags="delable")
+        self.c.create_image(50,270,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(160,270,image=gfw.image.load("Asset/image/장애.png"),tags="delable")
+        self.c.create_image(270,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
         
 
     def RetMain(self):
@@ -114,18 +124,18 @@ class InfoFunc:
 
     def LoadBookMark(self):
         try:
-            with open('bookmark','rb') as f:
+            with open('Asset/binary/bookmark','rb') as f:
                 self.bookmarkList = pickle.load(f)
         except:
             pass
         if self.Toilet in self.bookmarkList:
             self.isbooked = True
-            self.bookmarkButton.configure(image=gfw.image.load('YellowStar.png'))
+            self.bookmarkButton.configure(image=gfw.image.load('Asset/image/YellowStar.png'))
     def LoadText(self):
         try:
-            f = open(self.Toilet['SIGUN_NM']+'.txt',"r")
+            f = open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',"r")
         except:
-            open(self.Toilet['SIGUN_NM']+'.txt',"w")
+            open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',"w")
             return
         for line in f:
             if line.startswith(self.Toilet['PBCTLT_PLC_NM']):
@@ -138,17 +148,17 @@ class InfoFunc:
     def bookmarking(self):
         self.isbooked = not self.isbooked   
         if self.isbooked == True:
-            self.image = gfw.image.load('YellowStar.png')
+            self.image = gfw.image.load('Asset/image/YellowStar.png')
             self.bookmarkButton.configure(image=self.image)
             self.bookmarkList.append(self.Toilet)
-            with open('bookmark','wb') as f:
+            with open('Asset/binary/bookmark','wb') as f:
                 pickle.dump(self.bookmarkList,f)
 
         else:
-            self.image = gfw.image.load('WhiteStar.png')
+            self.image = gfw.image.load('Asset/image/WhiteStar.png')
             self.bookmarkButton.configure(image=self.image)
             del self.bookmarkList[self.bookmarkList.index(self.Toilet)]
-            with open('bookmark','wb') as f:
+            with open('Asset/binary/bookmark','wb') as f:
                 pickle.dump(self.bookmarkList,f)            
 
     def saveText(self):
@@ -156,7 +166,7 @@ class InfoFunc:
         imsi = imsi.replace('\n',"\+n")
         ToChange = False
         FindNothing = True
-        for line in fileinput.input(self.Toilet['SIGUN_NM']+'.txt',inplace= True):
+        for line in fileinput.input('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',inplace= True):
             if ToChange == True:
                 line = line.replace(line,imsi+'\n')
                 ToChange = False
@@ -166,7 +176,7 @@ class InfoFunc:
                 FindNothing = False
             sys.stdout.write(line)
         if FindNothing == True:
-            f = open(self.Toilet['SIGUN_NM']+'.txt','a')
+            f = open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt','a')
             f.write(self.Toilet['PBCTLT_PLC_NM']+'\n')
             f.write(imsi+'\n')
             f.close()

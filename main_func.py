@@ -143,7 +143,7 @@ class MainFunc:
         self.BookMarkTab = True
         self.bookmarkList = []
         try:
-            with open('bookmark','rb') as f:
+            with open('Asset/binary/bookmark','rb') as f:
                 self.bookmarkList = pickle.load(f)
         except:
             pass
