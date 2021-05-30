@@ -11,6 +11,7 @@ import ggToilet
 import fileinput
 import sys
 import pickle
+import gmail
 
 class InfoFunc:
     def __init__(self,Toilet):
@@ -23,7 +24,7 @@ class InfoFunc:
         self.bookmarkButton = Button(gfw.window,image=self.image,command=self.bookmarking)
         self.bookmarkButton.place(x=260,y=150)
         self.bookmarkList = []
-        Button(gfw.window,image=gfw.image.load('Asset/image/Gmail.png')).place(x=260,y=250)
+        Button(gfw.window,image=gfw.image.load('Asset/image/Gmail.png'), command = self.sendGmail).place(x=260,y=250)
         Button(gfw.window,image=gfw.image.load('Asset/image/tellegram.png')).place(x=260,y=350)
         Button(gfw.window,text="저장하기",width=10,height=2,command=self.saveText).place(x=150,y=430)
         Button(gfw.window,text="여자화장실",width=10,height=1,command=self.LoadWomanChart).place(x=500,y=450)
@@ -214,6 +215,20 @@ class InfoFunc:
         gfw.Objects[__name__].append(obj)
 
     
+    def sendGmail(self):
+        self.receiveMail = Tk()
+        self.receiveMail.title("Write Receive Email")
+        self.receiveMail.geometry("200x100")
+        self.entryMail = Entry(self.receiveMail)
+        self.sendbuttonMail = Button(self.receiveMail, text = "send", command = self.realSendGmail, width = 3, height = 1)
+        self.entryMail.grid()
+        self.sendbuttonMail.grid()
+        self.receiveMail.mainloop()
+
+    def realSendGmail(self):
+        gmail.Send(str(self.entryMail.get()), self.Toilet)
+        self.receiveMail.destroy()
+
 
     def draw(self):
         pass
