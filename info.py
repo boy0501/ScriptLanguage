@@ -16,7 +16,7 @@ import gmail
 class InfoFunc:
     def __init__(self,Toilet):
         Button(gfw.window,text="뒤로가기",width=10,height=2,command=self.RetMain).place(x=520,y=20)
-        self.textbox = Text(gfw.window,width=30,height=20,background="yellow")
+        self.textbox = Text(gfw.window,width=30,height=20,background="skyblue1")
         self.textbox.place(x=30,y=150)
         self.isbooked = False
         self.image = gfw.image.load('Asset/image/WhiteStar.png')
@@ -124,7 +124,7 @@ class InfoFunc:
     def RetMain(self):
         mylist = gfw.window.place_slaves()
         for i in mylist:
-            if i._name == "!frame": #Logo는 무조건 첫번째니까 항상 frame 1임
+            if i._name == "!frame" or i._name == "!label" or i._name == "!imagelabel": #Logo는 무조건 첫번째니까 항상 frame 1임
                 continue
             i.place_forget()
         gfw.Objects['imsi'][7].place(x=30,y=150)    #명단리스트
