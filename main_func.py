@@ -145,16 +145,17 @@ class MainFunc:
             self.listbox.insert(line+1, ggToilet.listToilet[line]['PBCTLT_PLC_NM'])
     
     def ToInfo(self):
-        mylist = gfw.window.place_slaves()
-        gfw.Objects['imsi'] = mylist
-        for i in mylist:
-            if i._name == "!frame": #Logo는 무조건 첫번째니까 항상 frame 1임
-                continue
-            i.place_forget()
         if self.BookMarkTab:
             selectedToilet = self.bookmarkList[self.listbox.curselection()[0]]
         else:
             selectedToilet =  ggToilet.listToilet[self.listbox.curselection()[0]]
+        
+        mylist = gfw.window.place_slaves()
+        gfw.Objects['imsi'] = mylist
+        for i in mylist:
+            if i._name == "!frame" or i._name == "!label" or i._name == "!imagelabel": #Logo는 무조건 첫번째니까 항상 frame 1임
+                continue
+            i.place_forget()
 
         info_func = InfoFunc(selectedToilet)
         gfw.world.add(gfw.layer.infofunc,info_func)

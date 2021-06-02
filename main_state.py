@@ -9,6 +9,7 @@ def enter():
     global image, elapsed ,bg
     gfw.world.init(['logo','mainfunc','infofunc'])
     global logo,m_func
+    gfw.window.configure(bg="skyblue2")
     logo = Logo()
     m_func = MainFunc()
     gfw.Objects['main_func'] = []
