@@ -10,6 +10,7 @@ import PIL.ImageTk
 import ggToilet
 from info import InfoFunc
 import pickle
+import receiveTelegram
 
 class MainFunc:
     def __init__(self):
@@ -26,7 +27,7 @@ class MainFunc:
         self.listbox = Listbox(self.ListFrame,yscrollcommand= self.scrollbar.set,width= 40,height=15)
         self.listbox.bind("<Button-1>",self.UpdateMap)
         #디폴트
-        ggToilet.getGGToiletDataFromISBN('시흥시')
+        ggToilet.getGGToiletDataFromISBN('시흥시', 0)
         for line in range(len( ggToilet.listToilet)):
             self.listbox.insert(line+1, ggToilet.listToilet[line]['PBCTLT_PLC_NM'])
         # for line in range(1,1001):
@@ -140,7 +141,7 @@ class MainFunc:
     def search(self):
         self.BookMarkTab = False
         self.listbox.delete(0, len(ggToilet.listToilet)+1)
-        ggToilet.getGGToiletDataFromISBN(self.combobox.get())
+        ggToilet.getGGToiletDataFromISBN(self.combobox.get(), 0)
         for line in range(len( ggToilet.listToilet)):
             self.listbox.insert(line+1, ggToilet.listToilet[line]['PBCTLT_PLC_NM'])
     
