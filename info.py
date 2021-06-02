@@ -12,6 +12,7 @@ import fileinput
 import sys
 import pickle
 import gmail
+import telegramButton
 
 class InfoFunc:
     def __init__(self,Toilet):
@@ -25,7 +26,7 @@ class InfoFunc:
         self.bookmarkButton.place(x=260,y=150)
         self.bookmarkList = []
         Button(gfw.window,image=gfw.image.load('Asset/image/Gmail.png'), command = self.sendGmail).place(x=260,y=250)
-        Button(gfw.window,image=gfw.image.load('Asset/image/tellegram.png')).place(x=260,y=350)
+        Button(gfw.window,image=gfw.image.load('Asset/image/tellegram.png'), command = self.sendTelegram).place(x=260,y=350)
         Button(gfw.window,text="저장하기",width=10,height=2,command=self.saveText).place(x=150,y=430)
         Button(gfw.window,text="여자화장실",width=10,height=1,command=self.LoadWomanChart).place(x=500,y=450)
         Button(gfw.window,text="남자화장실",width=10,height=1,command=self.LoadManChart).place(x=400,y=450)
@@ -228,6 +229,20 @@ class InfoFunc:
     def realSendGmail(self):
         gmail.Send(str(self.entryMail.get()), self.Toilet)
         self.receiveMail.destroy()
+
+    def sendTelegram(self):        #  보낼 텔레그램ID를 받는 창을 띄운다
+        self.receiveTelegram = Tk()
+        self.receiveTelegram.title("Write Receive TelegramID")
+        self.receiveTelegram.geometry("200x100")
+        self.entryTelegram = Entry(self.receiveTelegram)
+        self.sendbuttonTelegram = Button(self.receiveTelegram, text = "send", command = self.realSendTelegram, width = 3, height = 1)
+        self.entryTelegram.grid()
+        self.sendbuttonTelegram.grid()
+        self.receiveTelegram.mainloop()
+
+    def realSendTelegram(self):       # 실제로 텔레그램 메세지을 보내는 함수
+        telegramButton.Send(str(self.entryTelegram.get()), self.Toilet)
+        self.receiveTelegram.destroy()
 
 
     def draw(self):
