@@ -1,3 +1,3 @@
 import spam
 
-print(spam.makefile("im.txt"))
+print(spam.makefile('안녕.txt'))
