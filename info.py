@@ -13,27 +13,29 @@ import sys
 import pickle
 import gmail
 import telegramButton
+import tkinter.font
+import spam
 
 class InfoFunc:
     def __init__(self,Toilet):
-        Button(gfw.window,text="뒤로가기",width=10,height=2, bg = 'aquamarine2', activebackground = 'cyan2', command=self.RetMain).place(x=520,y=80)
-        self.textbox = Text(gfw.window,width=30,height=20,background="skyblue1")
+        Button(gfw.window,text="뒤로가기",width=10,height=2, bg = '#EBE5D9', activebackground = '#FACFAF', command=self.RetMain).place(x=520,y=80)
+        self.textbox = Text(gfw.window,width=30,height=20,background="#EBE5D9")
         self.textbox.place(x=30,y=150)
         self.isbooked = False
         self.image = gfw.image.load('Asset/image/WhiteStar.png')
         self.Toilet = Toilet
-        self.bookmarkButton = Button(gfw.window, background = 'aquamarine2', activebackground = 'cyan2', image=self.image,command=self.bookmarking)
+        self.bookmarkButton = Button(gfw.window, background = '#EBE5D9', activebackground = '#FACFAF', image=self.image,command=self.bookmarking)
         self.bookmarkButton.place(x=260,y=150)
         self.bookmarkList = []
-        Button(gfw.window, background = 'aquamarine2', activebackground = 'cyan2', image=gfw.image.load('Asset/image/Gmail.png'),  command = self.sendGmail).place(x=260,y=250)
-        Button(gfw.window, background = 'aquamarine2', activebackground = 'cyan2', image=gfw.image.load('Asset/image/tellegram.png'),  command = self.sendTelegram).place(x=260,y=350)
-        Button(gfw.window,text="저장하기",width=10,height=2, bg = 'aquamarine2', activebackground = 'cyan2', command=self.saveText).place(x=150,y=430)
-        Button(gfw.window,text="여자화장실",width=10,height=1, bg = 'aquamarine2', activebackground = 'cyan2', command=self.LoadWomanChart).place(x=500,y=450)
-        Button(gfw.window,text="남자화장실",width=10,height=1,bg = 'aquamarine2', activebackground = 'cyan2', command=self.LoadManChart).place(x=400,y=450)
+        Button(gfw.window, background = '#EBE5D9', activebackground = '#FACFAF', image=gfw.image.load('Asset/image/Gmail.png'),  command = self.sendGmail).place(x=260,y=250)
+        Button(gfw.window, background = '#EBE5D9', activebackground = '#FACFAF', image=gfw.image.load('Asset/image/tellegram.png'),  command = self.sendTelegram).place(x=260,y=350)
+        Button(gfw.window,text="저장하기",width=10,height=2, bg = '#EBE5D9', activebackground = '#FACFAF', command=self.saveText).place(x=150,y=430)
+        Button(gfw.window,text="여자화장실",width=10,height=1, bg = '#EBE5D9', activebackground = '#FACFAF', command=self.LoadWomanChart).place(x=500,y=450)
+        Button(gfw.window,text="남자화장실",width=10,height=1,bg = '#EBE5D9', activebackground = '#FACFAF', command=self.LoadManChart).place(x=400,y=450)
         
         c_width = 300
         c_height = 280
-        self.c = Canvas(gfw.window, background="skyblue1", width=c_width, height=c_height)
+        self.c = Canvas(gfw.window, background="#EBE5D9", width=c_width, height=c_height)
         self.c.place(x=330,y=150)
         self.LoadText()
         self.LoadBookMark()
@@ -67,15 +69,25 @@ class InfoFunc:
         #experiment with the variables below size to fit your needs
 
         c_width = 300
-        c_height = 280
+        c_height = 250
 
         y_stretch = 10
         y_gap = 20
-        x_stretch = 20  #그래프간 간격
+        x_stretch = 10  #그래프간 간격
         x_width = 20    #그래프 한칸의 너비
         x_gap = 40      #그래프 시작만큼의 너비 
+        num = 0 
+        mfont = tkinter.font.Font(family="맑은고딕",weight="bold")
         for x, y in enumerate(data):
             # calculate reactangle coordinates
+            if num == 2:
+                x_stretch = 30
+            if num == 3:
+                x_stretch = 23
+            if num == 4:
+                x_stretch = 30
+            if num == 5:
+                x_stretch = 26
             x0 = x * x_stretch + x * x_width + x_gap
             y0 = c_height - (y * y_stretch + y_gap)
             x1 = x * x_stretch + x * x_width + x_width + x_gap
@@ -83,13 +95,17 @@ class InfoFunc:
             # Here we draw the bar
             self.c.create_rectangle(x0, y0, x1, y1, fill="red",tags="delable")
             self.c.create_text(x0+2, y0, anchor=SW, text=str(y),tags="delable")
+            num+=1
         #self.c.create_text(50,270,text='\U0001f6bd')
-        self.c.create_image(50,270,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
-        self.c.create_image(90,270,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
-        self.c.create_image(130,270,image=gfw.image.load("Asset/image/장애.png"),tags="delable")
-        self.c.create_image(170,270,image=gfw.image.load("Asset/image/장애.png"),tags="delable")
-        self.c.create_image(210,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
-        self.c.create_image(250,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
+        self.c.create_text(65,260, text = "성인", font=mfont,tags="delable")
+        self.c.create_image(50,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(80,240,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
+        self.c.create_text(165,260,text="장애인",font=mfont,tags="delable")
+        self.c.create_image(150,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(180,240,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
+        self.c.create_text(265,260,text="어린이",font=mfont,tags="delable")
+        self.c.create_image(250,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(280,240,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
 
     
     def LoadWomanChart(self):
@@ -99,7 +115,8 @@ class InfoFunc:
         int(self.Toilet['FEMALE_CHILDUSE_WTRCLS_CNT'])]
 
         c_width = 300
-        c_height = 280
+        c_height = 250
+        mfont = tkinter.font.Font(family="맑은고딕",weight="bold")
 
         #experiment with the variables below size to fit your needs
 
@@ -117,9 +134,12 @@ class InfoFunc:
             # Here we draw the bar
             self.c.create_rectangle(x0, y0, x1, y1, fill="red",tags="delable")
             self.c.create_text(x0+2, y0, anchor=SW, text=str(y),tags="delable")
-        self.c.create_image(50,270,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
-        self.c.create_image(160,270,image=gfw.image.load("Asset/image/장애.png"),tags="delable")
-        self.c.create_image(270,270,image=gfw.image.load("Asset/image/어린이.png"),tags="delable")
+        self.c.create_text(50,260, text = "성인", font=mfont,tags="delable")
+        self.c.create_image(50,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_text(160,260,text="장애인",font=mfont,tags="delable")
+        self.c.create_image(160,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_text(270,260,text="어린이",font=mfont,tags="delable")
+        self.c.create_image(270,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
         
 
     def RetMain(self):
@@ -150,7 +170,8 @@ class InfoFunc:
         try:
             f = open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',"r")
         except:
-            open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',"w")
+            spam.makefile('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt')
+            #open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',"w")
             return
         for line in f:
             if line.startswith(self.Toilet['PBCTLT_PLC_NM']):
@@ -223,7 +244,7 @@ class InfoFunc:
         self.receiveMail.configure(bg="skyblue3")
         self.entryMail = Entry(self.receiveMail, width=33)
         self.entryMail.place(x=0, y=0.5)
-        self.sendbuttonMail = Button(self.receiveMail, text = "send", command = self.realSendGmail, bg = 'aquamarine2', activebackground = 'cyan2', 
+        self.sendbuttonMail = Button(self.receiveMail, text = "send", command = self.realSendGmail, bg = '#EBE5D9', activebackground = '#FACFAF', 
                                      width = 3, height = 1)
         self.sendbuttonMail.place(x = 270, y=0.5)
         self.entryMail.grid()
@@ -240,7 +261,7 @@ class InfoFunc:
         self.receiveTelegram.geometry("230x50")
         self.receiveTelegram.configure(bg="skyblue3")
         self.entryTelegram = Entry(self.receiveTelegram, width=33)
-        self.sendbuttonTelegram = Button(self.receiveTelegram, text = "send", command = self.realSendTelegram, bg = 'aquamarine2', activebackground = 'cyan2',
+        self.sendbuttonTelegram = Button(self.receiveTelegram, text = "send", command = self.realSendTelegram, bg = '#EBE5D9', activebackground = '#FACFAF',
                                          width = 3, height = 1)
         self.sendbuttonTelegram.place(x = 270, y=0.5)                                 
         self.entryTelegram.grid()

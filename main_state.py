@@ -3,6 +3,7 @@ from tkinter import *
 from Logo import Logo
 from main_func import MainFunc
 from info import InfoFunc
+import spam
 
 def enter(): 
     global image, elapsed ,bg
@@ -15,7 +16,6 @@ def enter():
     gfw.Objects['info'] =[]
     gfw.world.add(gfw.layer.logo,logo)
     gfw.world.add(gfw.layer.mainfunc,m_func)
-
     
 
 
