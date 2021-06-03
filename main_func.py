@@ -24,7 +24,7 @@ class MainFunc:
         self.scrollbar.pack(side="right",fill="y")
 
 
-        self.listbox = Listbox(self.ListFrame,yscrollcommand= self.scrollbar.set,width= 40,height=15)
+        self.listbox = Listbox(self.ListFrame,yscrollcommand= self.scrollbar.set,width= 40,height=15,bg="#EBE5D9")
         self.listbox.bind("<Button-1>",self.UpdateMap)
         #디폴트
         ggToilet.getGGToiletDataFromISBN('시흥시', 0)
@@ -38,12 +38,12 @@ class MainFunc:
         self.scrollbar["command"] = self.listbox.yview
         
         #실 사용할 버튼들
-        Button(gfw.window,text="즐겨찾기",width=18,height=2, bg = 'aquamarine2', activebackground = 'cyan2',command=self.BookMark).place(x=40,y=400)
-        Button(gfw.window,text="정보",width=18,height=2,  bg = 'aquamarine2', activebackground = 'cyan2', command=self.ToInfo).place(x=183,y=400)
-        Button(gfw.window,text="검색",width=10,height=2, bg = 'aquamarine2', activebackground = 'cyan2',command=self.search).place(x=520,y=80)
-        self.ZoominButton = Button(gfw.window,text="+",width=2,height=1, bg = 'aquamarine2', activebackground = 'cyan2', command=self.ZoomIn)
+        Button(gfw.window,text="즐겨찾기",width=18,height=2, bg = '#EBE5D9', activebackground = '#FACFAF',command=self.BookMark).place(x=40,y=400)
+        Button(gfw.window,text="정보",width=18,height=2,  bg = '#EBE5D9', activebackground = '#FACFAF', command=self.ToInfo).place(x=183,y=400)
+        Button(gfw.window,text="검색",width=10,height=2, bg = '#EBE5D9', activebackground = '#FACFAF',command=self.search).place(x=520,y=80)
+        self.ZoominButton = Button(gfw.window,text="+",width=2,height=1, bg = '#EBE5D9', activebackground = '#FACFAF', command=self.ZoomIn)
         self.ZoominButton.place(x=440,y=460)
-        self.ZoomOutButton = Button(gfw.window,text="-",width=2,height=1, bg = 'aquamarine2', activebackground = 'cyan2', command=self.ZoomOut)
+        self.ZoomOutButton = Button(gfw.window,text="-",width=2,height=1, bg = '#EBE5D9', activebackground = '#FACFAF', command=self.ZoomOut)
         self.ZoomOutButton.place(x=510,y=460)
 
         listSelectSigun = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', 
