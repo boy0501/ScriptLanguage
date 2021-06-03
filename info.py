@@ -16,24 +16,24 @@ import telegramButton
 
 class InfoFunc:
     def __init__(self,Toilet):
-        Button(gfw.window,text="뒤로가기",width=10,height=2,command=self.RetMain).place(x=520,y=20)
+        Button(gfw.window,text="뒤로가기",width=10,height=2, bg = 'aquamarine2', activebackground = 'cyan2', command=self.RetMain).place(x=520,y=80)
         self.textbox = Text(gfw.window,width=30,height=20,background="skyblue1")
         self.textbox.place(x=30,y=150)
         self.isbooked = False
         self.image = gfw.image.load('Asset/image/WhiteStar.png')
         self.Toilet = Toilet
-        self.bookmarkButton = Button(gfw.window,image=self.image,command=self.bookmarking)
+        self.bookmarkButton = Button(gfw.window, background = 'aquamarine2', activebackground = 'cyan2', image=self.image,command=self.bookmarking)
         self.bookmarkButton.place(x=260,y=150)
         self.bookmarkList = []
-        Button(gfw.window,image=gfw.image.load('Asset/image/Gmail.png'), command = self.sendGmail).place(x=260,y=250)
-        Button(gfw.window,image=gfw.image.load('Asset/image/tellegram.png'), command = self.sendTelegram).place(x=260,y=350)
-        Button(gfw.window,text="저장하기",width=10,height=2,command=self.saveText).place(x=150,y=430)
-        Button(gfw.window,text="여자화장실",width=10,height=1,command=self.LoadWomanChart).place(x=500,y=450)
-        Button(gfw.window,text="남자화장실",width=10,height=1,command=self.LoadManChart).place(x=400,y=450)
+        Button(gfw.window, background = 'aquamarine2', activebackground = 'cyan2', image=gfw.image.load('Asset/image/Gmail.png'),  command = self.sendGmail).place(x=260,y=250)
+        Button(gfw.window, background = 'aquamarine2', activebackground = 'cyan2', image=gfw.image.load('Asset/image/tellegram.png'),  command = self.sendTelegram).place(x=260,y=350)
+        Button(gfw.window,text="저장하기",width=10,height=2, bg = 'aquamarine2', activebackground = 'cyan2', command=self.saveText).place(x=150,y=430)
+        Button(gfw.window,text="여자화장실",width=10,height=1, bg = 'aquamarine2', activebackground = 'cyan2', command=self.LoadWomanChart).place(x=500,y=450)
+        Button(gfw.window,text="남자화장실",width=10,height=1,bg = 'aquamarine2', activebackground = 'cyan2', command=self.LoadManChart).place(x=400,y=450)
         
         c_width = 300
         c_height = 280
-        self.c = Canvas(gfw.window, width=c_width, height=c_height, bg= 'white')
+        self.c = Canvas(gfw.window, background="skyblue1", width=c_width, height=c_height)
         self.c.place(x=330,y=150)
         self.LoadText()
         self.LoadBookMark()
@@ -129,12 +129,12 @@ class InfoFunc:
                 continue
             i.place_forget()
         gfw.Objects['imsi'][7].place(x=30,y=150)    #명단리스트
-        gfw.Objects['imsi'][6].place(x=50,y=400)    #정보
-        gfw.Objects['imsi'][5].place(x=178,y=400)   #검색
-        gfw.Objects['imsi'][4].place(x=520,y=20)    #즐찾
-        gfw.Objects['imsi'][3].place(x=300,y=20)    #줌인
-        gfw.Objects['imsi'][2].place(x=300,y=70)    #줌아웃
-        gfw.Objects['imsi'][1].place(x=330,y=40)    #콤보박스
+        gfw.Objects['imsi'][6].place(x=40,y=400)    #즐찿
+        gfw.Objects['imsi'][5].place(x=183,y=400)   #정보
+        gfw.Objects['imsi'][4].place(x=520,y=80)    #검색
+        gfw.Objects['imsi'][3].place(x=440,y=460)    #줌인
+        gfw.Objects['imsi'][2].place(x=510,y=460)    #줌아웃
+        gfw.Objects['imsi'][1].place(x=330,y=100)    #콤보박스
         gfw.Objects['imsi'][0].place(x=330,y=150)    #지도리스트
 
     def LoadBookMark(self):
@@ -219,9 +219,13 @@ class InfoFunc:
     def sendGmail(self):
         self.receiveMail = Tk()
         self.receiveMail.title("Write Receive Email")
-        self.receiveMail.geometry("200x100")
-        self.entryMail = Entry(self.receiveMail)
-        self.sendbuttonMail = Button(self.receiveMail, text = "send", command = self.realSendGmail, width = 3, height = 1)
+        self.receiveMail.geometry("230x50")
+        self.receiveMail.configure(bg="skyblue3")
+        self.entryMail = Entry(self.receiveMail, width=33)
+        self.entryMail.place(x=0, y=0.5)
+        self.sendbuttonMail = Button(self.receiveMail, text = "send", command = self.realSendGmail, bg = 'aquamarine2', activebackground = 'cyan2', 
+                                     width = 3, height = 1)
+        self.sendbuttonMail.place(x = 270, y=0.5)
         self.entryMail.grid()
         self.sendbuttonMail.grid()
         self.receiveMail.mainloop()
@@ -233,9 +237,12 @@ class InfoFunc:
     def sendTelegram(self):        #  보낼 텔레그램ID를 받는 창을 띄운다
         self.receiveTelegram = Tk()
         self.receiveTelegram.title("Write Receive TelegramID")
-        self.receiveTelegram.geometry("200x100")
-        self.entryTelegram = Entry(self.receiveTelegram)
-        self.sendbuttonTelegram = Button(self.receiveTelegram, text = "send", command = self.realSendTelegram, width = 3, height = 1)
+        self.receiveTelegram.geometry("230x50")
+        self.receiveTelegram.configure(bg="skyblue3")
+        self.entryTelegram = Entry(self.receiveTelegram, width=33)
+        self.sendbuttonTelegram = Button(self.receiveTelegram, text = "send", command = self.realSendTelegram, bg = 'aquamarine2', activebackground = 'cyan2',
+                                         width = 3, height = 1)
+        self.sendbuttonTelegram.place(x = 270, y=0.5)                                 
         self.entryTelegram.grid()
         self.sendbuttonTelegram.grid()
         self.receiveTelegram.mainloop()

@@ -13,6 +13,7 @@ delta_time = 0
 window = Tk()
 Objects = {}
 
+
 def quit():
     global running
     running = False
@@ -22,13 +23,12 @@ def run(start_state):
     running = True
     stack = [start_state]
 
-    w,h = '640','480'
+    w,h = '660','500'
     if hasattr(start_state, 'canvas_width'): w = str(start_state.canvas_width)
     if hasattr(start_state, 'canvas_height'): h = str(start_state.canvas_height)
     window.title("똥터")
     window.geometry(w+'x'+h)
     window.resizable(width=False,height=False)
-
     start_state.enter()
     window.mainloop()
     while (len(stack) > 0):

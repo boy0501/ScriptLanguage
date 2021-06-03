@@ -56,6 +56,6 @@ def Send(recipientAddr, Toilet):
     s.ehlo()
     s.starttls()
     s.ehlo()
-    s.login("kimkiyoun33@gmail.com","yurisoleteunha-1")
+    s.login("kimkiyoun33@gmail.com","yurisoletminju-1")
     s.sendmail(senderAddr , [recipientAddr], msg.as_string())
     s.close()

@@ -30,5 +30,5 @@ class ImageLabel(Label):
         if self.frames:
             self.loc += 1
             self.loc %= len(self.frames)
-            self.config(image=self.frames[self.loc],bg="skyblue2")
+            self.config(bg="skyblue3", image=self.frames[self.loc])
             self.after(self.delay, self.next_frame)

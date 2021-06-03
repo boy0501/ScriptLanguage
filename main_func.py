@@ -38,13 +38,13 @@ class MainFunc:
         self.scrollbar["command"] = self.listbox.yview
         
         #실 사용할 버튼들
-        Button(gfw.window,text="즐겨찾기",width=18,height=2,command=self.BookMark).place(x=50,y=400)
-        Button(gfw.window,text="정보",width=18,height=2,command=self.ToInfo).place(x=178,y=400)
-        Button(gfw.window,text="검색",width=10,height=2,command=self.search).place(x=520,y=20)
-        self.ZoominButton = Button(gfw.window,text="+",width=1,height=1,command=self.ZoomIn)
-        self.ZoominButton.place(x=300,y=20)
-        self.ZoomOutButton = Button(gfw.window,text="-",width=1,height=1,command=self.ZoomOut)
-        self.ZoomOutButton.place(x=300,y=70)
+        Button(gfw.window,text="즐겨찾기",width=18,height=2, bg = 'aquamarine2', activebackground = 'cyan2',command=self.BookMark).place(x=40,y=400)
+        Button(gfw.window,text="정보",width=18,height=2,  bg = 'aquamarine2', activebackground = 'cyan2', command=self.ToInfo).place(x=183,y=400)
+        Button(gfw.window,text="검색",width=10,height=2, bg = 'aquamarine2', activebackground = 'cyan2',command=self.search).place(x=520,y=80)
+        self.ZoominButton = Button(gfw.window,text="+",width=2,height=1, bg = 'aquamarine2', activebackground = 'cyan2', command=self.ZoomIn)
+        self.ZoominButton.place(x=440,y=460)
+        self.ZoomOutButton = Button(gfw.window,text="-",width=2,height=1, bg = 'aquamarine2', activebackground = 'cyan2', command=self.ZoomOut)
+        self.ZoomOutButton.place(x=510,y=460)
 
         listSelectSigun = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', 
                            '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
@@ -53,7 +53,7 @@ class MainFunc:
         values=[listSelectSigun[i] for i in range(len(listSelectSigun))] 
 
         self.combobox = tkinter.ttk.Combobox(gfw.window,values=values)
-        self.combobox.place(x=330,y=40)
+        self.combobox.place(x=300,y=100)
         self.combobox.config(state='readonly')
         self.combobox.current(13)   #시흥시
 
@@ -63,6 +63,9 @@ class MainFunc:
         self.image = PIL.ImageTk.PhotoImage(im)
         self.mapinfo = Label(gfw.window,image=self.image)
         self.mapinfo.place(x=330,y=150)
+
+
+
     def ZoomIn(self):
         if self.Zoom + 1 < 19:
             self.Zoom += 1

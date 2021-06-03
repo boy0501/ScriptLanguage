@@ -40,18 +40,43 @@ def replyAptData(user, location):
     else:
         noti.sendMessage( user, '경기도의 시군구를 제대로 입력하세요' )
 
-def save( user, loc_param ):
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS users( user TEXT, location TEXT, PRIMARY KEY(user, location) )')
-    try:
-        cursor.execute('INSERT INTO users(user, location) VALUES ("%s", "%s")' % (user, loc_param))
-    except sqlite3.IntegrityError:
-        noti.sendMessage( user, '이미 해당 정보가 저장되어 있습니다.' )
-        return
+def replyToiletDate( user, location, toiletName ):
+    res_list = noti.getToiletData( location, toiletName )
+
+    if res_list != None:
+        msg = ''
+        # 받은 정보의 리스트를 정리하는 구간
+        msg = ''
+        msg += str("이름 : " + res_list['PBCTLT_PLC_NM']+'\n')
+        if res_list['REFINE_ROADNM_ADDR'] == None:
+            msg += ("도로명주소 : 정보가 없습니다\n")
+        else:
+            msg += str("도로명 주소 : " + res_list['REFINE_ROADNM_ADDR']+'\n')
+        if res_list['OPEN_TM_INFO'] == None:
+                msg += ("개방시간 : 미정\n")
+        else:
+            msg += str("개방시간 : " + res_list['OPEN_TM_INFO']+'\n')
+        if res_list['MANAGE_INST_TELNO'] == None:
+            msg += str("전화번호 : 없음\n")
+        else:
+            msg += str("전화번호 : " + res_list['MANAGE_INST_TELNO'] + '\n')  
+        msg += str("남녀공용 : " + res_list['MALE_FEMALE_TOILET_YN'] + '\n')
+        msg += str("메모\n")
+
+        try:
+            f = open('Asset/txt/' + res_list['SIGUN_NM']+'.txt',"r")
+        except:
+            msg += str("--메모없음--")
+
+        for line in f:
+            if line.startswith(res_list['PBCTLT_PLC_NM']):
+                line = f.readline()
+                line = line.replace('\+n','\n')
+                msg += str(line + '\n')
+        
+        noti.sendMessage( user, msg )
     else:
-        noti.sendMessage( user, '저장되었습니다.' )
-        conn.commit()
+        noti.sendMessage( user, '화장실 [시군구] [화장실명]\nEx)화장실 시흥시 오이도역\n제대로 입력하세요' )
 
 def handle(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -66,8 +91,14 @@ def handle(msg):
         print('try to 지역', args[1])
         replyAptData( chat_id, args[1] )
     elif text.startswith('화장실')  and len(args)>1:
-        print('try to 화장실', args[1])
-        save( chat_id, args[1] )
+        tempArgs = ''
+        for i in range(2, len(args)):
+            tempArgs += args[i]
+
+            if i != (len(args)-1):
+                tempArgs +=' '
+        print('try to 화장실', args[1], tempArgs)
+        replyToiletDate( chat_id, args[1], tempArgs )
     else:
         bot.sendMessage(chat_id, '모르는 명령어입니다.\n지역 ex)\'지역 시흥시\'\n 화장실 ex)\'의정부시 상록근린공원\'\n 제대로 된 명령을 입력하세요.')
 

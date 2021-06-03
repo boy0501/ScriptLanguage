@@ -23,6 +23,20 @@ def getData(location):
 
     return res_list
 
+def getToiletData(location, ToiletName):
+    res_list = []
+    ggToilet.getGGToiletDataFromISBN(location, 1)
+    res_list = ggToilet.listToiletForTelegream
+    for i in range(len(res_list)):
+        if ToiletName == res_list[i]['PBCTLT_PLC_NM']:
+            print(res_list[i]['PBCTLT_PLC_NM'])
+            return res_list[i]
+
+    # for line in range(len( ggToilet.listToiletForTelegream)):
+    #     res_list.append(line+1, ggToilet.listToiletForTelegream[line]['PBCTLT_PLC_NM'])
+
+    return None
+
 def sendMessage(user, msg):
     try:
         bot.sendMessage(user, msg)
