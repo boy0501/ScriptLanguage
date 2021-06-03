@@ -4,19 +4,18 @@ from Logo import Logo
 from main_func import MainFunc
 from info import InfoFunc
 
-
-def enter():
+def enter(): 
     global image, elapsed ,bg
     gfw.world.init(['logo','mainfunc','infofunc'])
     global logo,m_func
-    gfw.window.configure(bg="skyblue2")
+    gfw.window.configure(bg="skyblue3")
     logo = Logo()
     m_func = MainFunc()
     gfw.Objects['main_func'] = []
     gfw.Objects['info'] =[]
     gfw.world.add(gfw.layer.logo,logo)
     gfw.world.add(gfw.layer.mainfunc,m_func)
-    
+
     
 
 
