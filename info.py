@@ -170,8 +170,6 @@ class InfoFunc:
         try:
             f = open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',"r")
         except:
-            print("들어옴")
-            a = 'Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt'
             spam.makefile('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt')
             #open('Asset/txt/' + self.Toilet['SIGUN_NM']+'.txt',"w")
             return

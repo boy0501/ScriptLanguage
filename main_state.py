@@ -16,7 +16,6 @@ def enter():
     gfw.Objects['info'] =[]
     gfw.world.add(gfw.layer.logo,logo)
     gfw.world.add(gfw.layer.mainfunc,m_func)
-    spam.makefile("qqq.txt")
     
 
 
