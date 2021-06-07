@@ -149,13 +149,13 @@ class InfoFunc:
                 continue
             i.place_forget()
         gfw.Objects['imsi'][7].place(x=30,y=150)    #명단리스트
-        gfw.Objects['imsi'][6].place(x=40,y=400)    #즐찿
-        gfw.Objects['imsi'][5].place(x=183,y=400)   #정보
-        gfw.Objects['imsi'][4].place(x=520,y=80)    #검색
-        gfw.Objects['imsi'][3].place(x=440,y=460)    #줌인
-        gfw.Objects['imsi'][2].place(x=510,y=460)    #줌아웃
-        gfw.Objects['imsi'][1].place(x=330,y=100)    #콤보박스
-        gfw.Objects['imsi'][0].place(x=330,y=150)    #지도리스트
+        gfw.Objects['imsi'][6].place(x=330,y=150)    #지도리스트
+        gfw.Objects['imsi'][5].place(x=40,y=400)    #즐찿
+        gfw.Objects['imsi'][4].place(x=183,y=400)   #정보
+        gfw.Objects['imsi'][3].place(x=520,y=80)    #검색
+        gfw.Objects['imsi'][2].place(x=600,y=370)    #줌인
+        gfw.Objects['imsi'][1].place(x=600,y=410)    #줌아웃
+        gfw.Objects['imsi'][0].place(x=330,y=100)    #콤보박스
 
     def LoadBookMark(self):
         try:

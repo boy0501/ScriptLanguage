@@ -37,14 +37,21 @@ class MainFunc:
         self.listbox.pack(side="left")
         self.scrollbar["command"] = self.listbox.yview
         
+        uri = 'https://api-maps.cloud.toast.com/maps/v3.0/appkeys/vtJBJf5yCkI6EgPY/static-maps?lon=%s&lat=%s&width=300&height=300&mx=%s&my=%s' % (126.7379803,37.3706350,126.7379803,37.3706350)
+        r = requests.get(uri)
+        im = Image.open(BytesIO(r.content))
+        self.image = PIL.ImageTk.PhotoImage(im)
+        self.mapinfo = Label(gfw.window,image=self.image)
+        self.mapinfo.place(x=330,y=150)
+
         #실 사용할 버튼들
         Button(gfw.window,text="즐겨찾기",width=18,height=2, bg = '#EBE5D9', activebackground = '#FACFAF',command=self.BookMark).place(x=40,y=400)
         Button(gfw.window,text="정보",width=18,height=2,  bg = '#EBE5D9', activebackground = '#FACFAF', command=self.ToInfo).place(x=183,y=400)
         Button(gfw.window,text="검색",width=10,height=2, bg = '#EBE5D9', activebackground = '#FACFAF',command=self.search).place(x=520,y=80)
         self.ZoominButton = Button(gfw.window,text="+",width=2,height=1, bg = '#EBE5D9', activebackground = '#FACFAF', command=self.ZoomIn)
-        self.ZoominButton.place(x=440,y=460)
+        self.ZoominButton.place(x=600,y=370)
         self.ZoomOutButton = Button(gfw.window,text="-",width=2,height=1, bg = '#EBE5D9', activebackground = '#FACFAF', command=self.ZoomOut)
-        self.ZoomOutButton.place(x=510,y=460)
+        self.ZoomOutButton.place(x=600,y=410)
 
         listSelectSigun = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', 
                            '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
@@ -57,12 +64,6 @@ class MainFunc:
         self.combobox.config(state='readonly')
         self.combobox.current(13)   #시흥시
 
-        uri = 'https://api-maps.cloud.toast.com/maps/v3.0/appkeys/vtJBJf5yCkI6EgPY/static-maps?lon=%s&lat=%s&width=300&height=300&mx=%s&my=%s' % (126.7379803,37.3706350,126.7379803,37.3706350)
-        r = requests.get(uri)
-        im = Image.open(BytesIO(r.content))
-        self.image = PIL.ImageTk.PhotoImage(im)
-        self.mapinfo = Label(gfw.window,image=self.image)
-        self.mapinfo.place(x=330,y=150)
 
 
 
