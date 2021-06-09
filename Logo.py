@@ -8,13 +8,13 @@ class Logo:
         now = datetime.datetime.now()
         self.frame = Frame(gfw.window)
         self.frame.place(x = 100, y = 0)
-        self.logo = gfw.image.load('Asset/image/똥터3.png')
+        self.logo = gfw.image.load('Asset/image/logo3.png')
         Label(self.frame,background="skyblue3", image=self.logo).pack()
 
         self.lbl = gif.ImageLabel(gfw.window)
         self.lbl.load('Asset/image/run3.gif')
         self.lbl.place(x=280,y=-40)
-        self.byunimg = PhotoImage(file='Asset/image/메인변기.png')
+        self.byunimg = PhotoImage(file='Asset/image/logotoilet.png')
         self.byunimg = self.byunimg.subsample(20,20)
         self.imglabelx = 280
 

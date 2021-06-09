@@ -98,14 +98,14 @@ class InfoFunc:
             num+=1
         #self.c.create_text(50,270,text='\U0001f6bd')
         self.c.create_text(65,260, text = "성인", font=mfont,tags="delable")
-        self.c.create_image(50,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
-        self.c.create_image(80,240,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
+        self.c.create_image(50,240,image=gfw.image.load("Asset/image/largetoilet.png"),tags="delable")
+        self.c.create_image(80,240,image=gfw.image.load("Asset/image/smalltoilet.png"),tags="delable")
         self.c.create_text(165,260,text="장애인",font=mfont,tags="delable")
-        self.c.create_image(150,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
-        self.c.create_image(180,240,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
+        self.c.create_image(150,240,image=gfw.image.load("Asset/image/largetoilet.png"),tags="delable")
+        self.c.create_image(180,240,image=gfw.image.load("Asset/image/smalltoilet.png"),tags="delable")
         self.c.create_text(265,260,text="어린이",font=mfont,tags="delable")
-        self.c.create_image(250,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
-        self.c.create_image(280,240,image=gfw.image.load("Asset/image/소변기.png"),tags="delable")
+        self.c.create_image(250,240,image=gfw.image.load("Asset/image/largetoilet.png"),tags="delable")
+        self.c.create_image(280,240,image=gfw.image.load("Asset/image/smalltoilet.png"),tags="delable")
 
     
     def LoadWomanChart(self):
@@ -135,11 +135,11 @@ class InfoFunc:
             self.c.create_rectangle(x0, y0, x1, y1, fill="red",tags="delable")
             self.c.create_text(x0+2, y0, anchor=SW, text=str(y),tags="delable")
         self.c.create_text(50,260, text = "성인", font=mfont,tags="delable")
-        self.c.create_image(50,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(50,240,image=gfw.image.load("Asset/image/largetoilet.png"),tags="delable")
         self.c.create_text(160,260,text="장애인",font=mfont,tags="delable")
-        self.c.create_image(160,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(160,240,image=gfw.image.load("Asset/image/largetoilet.png"),tags="delable")
         self.c.create_text(270,260,text="어린이",font=mfont,tags="delable")
-        self.c.create_image(270,240,image=gfw.image.load("Asset/image/변기.png"),tags="delable")
+        self.c.create_image(270,240,image=gfw.image.load("Asset/image/largetoilet.png"),tags="delable")
         
 
     def RetMain(self):
